@@ -13,7 +13,7 @@ title: Bakri Zubir
 
 I'm a project management leader and senior engineer with over 16 years of experience driving asset development and capital projects across IOC, NOC, and Fortune 500 energy companies. I specialize in bridging complex subsurface engineering with large-scale capital projects, managing portfolios up to $250M throughout the full project lifecycle.
 
-My career spans leadership roles at **EOG Resources**, **Bapco Upstream**, **Hess Corporation**, **EnQuest**, and **Petronas** across the Middle East and South East Asia. I've consistently delivered exceptional results: reducing well costs by 50%, accelerating project timelines, and driving operational efficiency improvements of 20-110%.
+My career spans leadership roles at **EOG Resources**, **Bapco Upstream**, **Carigali Hess-Corporation**, **EnQuest PLC**, and **Petronas** across the Middle East and South East Asia. I've consistently delivered exceptional results: reducing well costs by 50%, accelerating project timelines, and driving operational efficiency improvements of 20-110%.
 
 As a Chartered Engineer with an MSc in Petroleum Engineering from Heriot-Watt University, I combine deep technical expertise with strategic vision for the future of energy—particularly in gas development, CCUS, and digital transformation of traditional drilling operations.
 
