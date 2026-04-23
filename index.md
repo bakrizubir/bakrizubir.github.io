@@ -25,8 +25,9 @@ As a Chartered Engineer with an MSc in Petroleum Engineering from Heriot-Watt Un
 
 <p>I'm developing a suite of <strong>web-based engineering tools</strong> to modernize well engineering workflows. These tools, originally built as Excel templates, are being transformed into accessible web applications for the global energy community.</p>
 
-<p style="text-align: center; margin-top: 25px;">
+<p style="text-align: center; margin-top: 25px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
   <a href="portfolio" style="display: inline-block; background-color: #0066cc; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background-color 0.3s;">Explore My Tools →</a>
+  <a href="rigs" style="display: inline-block; background-color: #0066cc; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background-color 0.3s;">Offshore Rig Tracker →</a>
 </p>
 
 </div>
