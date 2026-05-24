@@ -18,10 +18,11 @@ Calculates safe drilling margins and kick tolerance for well control scenarios. 
 
 ---
 
-### 2. **MD-TVD Depth Converter**
+### 2. **[MD-TVD Depth Converter](https://bakrizubir.com/depth-converter.html)**
+
 Converts measured depth to true vertical depth for directional and horizontal wells. Essential for accurate well planning, survey calculations, and geological correlation.
 
-*Status: Web app in development*
+<span style="background-color: #d4edda; color: #155724; padding: 2px 8px; border-radius: 4px; font-size: 13px;">✅ Status: Web app is Live</span>
 
 ---
 
