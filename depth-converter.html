@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MD–TVD Depth Converter | Bakri Zubir</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Chivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #333;
+      background: #fff;
+    }
+
+    /* ── Jekyll orderedlist-style wrapper ── */
+    .wrapper {
+      width: 860px;
+      margin: 0 auto;
+      padding: 2rem 0 4rem;
+    }
+
+    header.site-header {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    header.site-header h1 a {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #333;
+      text-decoration: none;
+    }
+    header.site-header p {
+      font-size: 13px;
+      color: #999;
+      margin-top: 2px;
+    }
+    header.site-header a.github-link {
+      font-size: 12px;
+      color: #999;
+      text-decoration: none;
+    }
+    header.site-header a.github-link:hover { color: #333; }
+
+    h1.page-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 0.4rem;
+    }
+
+    .page-desc {
+      font-size: 13px;
+      color: #999;
+      margin-top: 4px;
+      margin-bottom: 1.5rem;
+    }
+    .steps-box {
+      background: #f9f9f9;
+      border: 1px solid #eee;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.75rem;
+    }
+    .steps-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #999;
+      margin-bottom: 8px;
+    }
+    .steps-list {
+      margin: 0;
+      padding-left: 1.4rem;
+      color: #555;
+      font-size: 13px;
+      line-height: 2;
+    }
+    .steps-list li strong { color: #333; }
+    .page-subtitle {
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 1.5rem;
+    }
+
+    /* ── Controls ── */
+    .controls {
+      display: flex;
+      align-items: flex-end;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .field-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #999;
+      margin-bottom: 5px;
+    }
+    .rkb-input {
+      width: 90px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 6px 10px;
+      font-size: 14px;
+      font-family: inherit;
+      color: #333;
+      text-align: center;
+    }
+    .rkb-input:focus { outline: none; border-color: #333; }
+
+    .load-btn {
+      padding: 7px 18px;
+      border-radius: 4px;
+      border: 1px solid #333;
+      background: #333;
+      color: #fff;
+      font-size: 13px;
+      font-family: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .load-btn:hover { background: #555; border-color: #555; }
+    .load-btn:active { transform: scale(0.98); }
+
+    .status {
+      font-size: 12px;
+      color: #999;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #ddd;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .status-dot.ready { background: #2ecc71; }
+
+    /* ── Cards ── */
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .card-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #999;
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 520px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      resize: vertical;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 10px;
+      background: #fafafa;
+      color: #666;
+      line-height: 1.7;
+    }
+    textarea:focus { outline: none; border-color: #333; color: #333; background: #fff; }
+
+    .hint {
+      font-size: 12px;
+      color: #bbb;
+      margin-top: 8px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .copy-btn {
+      padding: 5px 12px;
+      font-size: 12px;
+      font-family: inherit;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: #fff;
+      color: #999;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .copy-btn:hover { border-color: #333; color: #333; }
+
+    .out-wrap { overflow-x: auto; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th {
+      text-align: center;
+      padding: 8px 8px;
+      color: #999;
+      font-weight: 700;
+      border-bottom: 2px solid #eee;
+      white-space: nowrap;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    td {
+      padding: 6px 6px;
+      border-bottom: 1px solid #f5f5f5;
+      text-align: center;
+      vertical-align: middle;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #fafafa; }
+
+    .depth-input {
+      width: 110px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 5px 8px;
+      font-size: 13px;
+      font-family: 'Courier New', monospace;
+      background: #fff;
+      color: #333;
+      text-align: center;
+    }
+    .depth-input:focus { outline: none; border-color: #333; }
+    .depth-input[readonly] { color: #bbb; cursor: default; background: #fafafa; }
+    .depth-input.has-result {
+      color: #27ae60;
+      border-color: #a8d5b5;
+      background: #f0faf4;
+      font-weight: 600;
+    }
+    .depth-input.oor {
+      color: #e74c3c;
+      border-color: #f5c6c6;
+      background: #fef5f5;
+      font-size: 11px;
+    }
+
+    .result-cell { font-family: 'Courier New', monospace; font-size: 13px; }
+    .result-cell.computed { color: #27ae60; font-weight: 600; }
+    .result-cell.muted { color: #ccc; }
+
+    .del-btn {
+      background: none; border: none; cursor: pointer;
+      color: #ccc; padding: 2px 6px;
+      border-radius: 4px; font-size: 15px;
+      transition: color 0.15s;
+    }
+    .del-btn:hover { color: #e74c3c; }
+
+    .add-btn {
+      margin-top: 12px;
+      padding: 7px 14px;
+      font-size: 12px;
+      font-family: inherit;
+      border: 1px dashed #ddd;
+      border-radius: 4px;
+      background: transparent;
+      color: #999;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.15s;
+    }
+    .add-btn:hover { background: #fafafa; color: #333; border-color: #bbb; }
+
+    .empty-state {
+      color: #ccc;
+      font-size: 13px;
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid #ddd;
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      font-size: 12px;
+      color: #bbb;
+    }
+    footer a { color: #999; text-decoration: none; }
+    footer a:hover { color: #333; }
+
+    @media (max-width: 900px) {
+      .wrapper { width: 100%; padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header class="site-header">
+    <h1><a href="https://bakrizubir.com">Bakri Zubir</a></h1>
+    <p>Project Management Leader | Well Engineering &amp; Digital Innovation</p>
+    <a class="github-link" href="https://github.com/bakrizubir">View My GitHub Profile</a>
+  </header>
+
+  <h1 class="page-title">MD &ndash; TVD Depth Converter</h1>
+  <p class="page-subtitle">Bakri's web-based MD-TVD converter for drilling engineers</p>
+  <p class="page-desc">Minimum Radius of Curvature method &nbsp;&middot;&nbsp; Paste your well survey, then look up any depth by MD, TVD, or TVDss</p>
+
+  <div class="steps-box">
+    <p class="steps-title">How to use:</p>
+    <ol class="steps-list">
+      <li>Paste your well survey in the input table below <strong>(MD, Incl, Azimuth)</strong> from any Excel or ASCII file</li>
+      <li>Press the <strong>&ldquo;Load Survey&rdquo;</strong> button</li>
+      <li>You can then look up any depth by MD, TVD, or TVDss in the table below</li>
+    </ol>
+  </div>
+
+  <div class="controls">
+    <div class="field-group">
+      <label>RKB Elevation</label>
+      <input class="rkb-input" type="number" id="rkb" value="136" step="0.1" onchange="recalcAll()" />
+    </div>
+    <div class="field-group">
+      <label>&nbsp;</label>
+      <button class="load-btn" onclick="loadSurvey()">&#8593; Load Survey</button>
+    </div>
+    <div class="status">
+      <span class="status-dot" id="status-dot"></span>
+      <span id="survey-status">No survey loaded</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Survey Input &mdash; MD &nbsp; Incl &nbsp; Azimuth &nbsp;(paste from Excel)</div>
+    <textarea id="survey-input" spellcheck="false" placeholder="0	0	0
+100	0	240
+200	0	240
+300	0	240
+400	0	240
+500	1.60	240
+600	3.00	240
+700	3.00	240
+800	3.00	240
+900	3.00	240
+1000	3.00	240
+1100	3.00	240
+1200	3.00	240"></textarea>
+    <div class="hint">Three tab-separated columns: MD &nbsp;&middot;&nbsp; Inclination &nbsp;&middot;&nbsp; Azimuth &mdash; blank Incl/Az treated as 0</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-label" style="margin-bottom:0;">Depth Lookup &mdash; type in one column only per row</div>
+      <button class="copy-btn" onclick="copyResults()">&#128203; Copy</button>
+    </div>
+    <div class="out-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>MD (AHBDF)</th>
+            <th>TVD (TVBDF)</th>
+            <th>TVDss</th>
+            <th>Incl (°)</th>
+            <th>Azimuth (°)</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="lookup-body">
+          <tr><td colspan="7"><div class="empty-state">Load a survey first, then type any depth to look up</div></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <button class="add-btn" id="add-row-btn" onclick="addRow()" style="display:none;">+ Add Row</button>
+  </div>
+
+  <footer>
+    <p><a href="https://bakrizubir.com">&#8592; Back to Home</a> &nbsp;&middot;&nbsp; Built by <a href="https://bakrizubir.com">Bakri Zubir</a> &nbsp;&middot;&nbsp; Well Engineering Tools</p>
+  </footer>
+
+</div>
+<script>
+let computed = [], rows = [], rowCount = 0;
+
+function toRad(d) { return d * Math.PI / 180; }
+function r2(v) { return Math.round(v * 100) / 100; }
+
+function calcSurvey(stations) {
+  const res = [];
+  for (let i = 0; i < stations.length; i++) {
+    const s = stations[i];
+    if (i === 0) { res.push({ md: s.md, tvd: 0.0, inc: s.inc, az: s.az, a: 0.0, b: 0.0 }); continue; }
+    const prev = res[i-1];
+    const dmd = r2(s.md) - r2(prev.md);
+    const i1 = toRad(prev.inc), i2 = toRad(s.inc);
+    const a1 = toRad(prev.az),  a2 = toRad(s.az);
+    const cosVal = Math.cos((s.inc-prev.inc)*Math.PI/180) - Math.sin(i1)*Math.sin(i2)*(1-Math.cos((s.az-prev.az)*Math.PI/180));
+    const N = Math.acos(Math.max(-1,Math.min(1,cosVal)))*180/Math.PI + 1e-10;
+    const RF = (180*2*Math.tan(N*Math.PI/360))/(N*Math.PI);
+    const tvd = prev.tvd + dmd*RF*(Math.cos(i1)+Math.cos(i2))/2;
+    const a = prev.md !== s.md ? (prev.tvd-tvd)/(prev.md-s.md) : 0;
+    const b = prev.tvd - prev.md*a;
+    res.push({ md: s.md, tvd, inc: s.inc, az: s.az, a, b });
+  }
+  return res;
+}
+
+function parseInput(raw) {
+  const pts = [{md:0,inc:0,az:0}];
+  for (const line of raw.trim().split(/\r?\n/).filter(l=>l.trim())) {
+    const p = line.trim().split(/\t/);
+    const md = parseFloat(p[0]);
+    const inc = p[1]&&p[1].trim()!=='' ? parseFloat(p[1]) : 0;
+    const az  = p[2]&&p[2].trim()!=='' ? parseFloat(p[2]) : 0;
+    if (!isNaN(md)) pts.push({md, inc: isNaN(inc)?0:inc, az: isNaN(az)?0:az});
+  }
+  return pts;
+}
+
+function loadSurvey() {
+  const parsed = parseInput(document.getElementById('survey-input').value);
+  if (parsed.length < 2) {
+    document.getElementById('survey-status').textContent = 'Need at least 2 stations';
+    document.getElementById('status-dot').className = 'status-dot';
+    return;
+  }
+  computed = calcSurvey(parsed);
+  document.getElementById('survey-status').textContent = `${parsed.length} stations loaded`;
+  document.getElementById('status-dot').className = 'status-dot ready';
+  document.getElementById('add-row-btn').style.display = 'block';
+  rows = []; rowCount = 0;
+  document.getElementById('lookup-body').innerHTML = '';
+  addRow();
+}
+
+function findLowerIdx(key, val) {
+  let idx = -1;
+  for (let i = 0; i < computed.length; i++) { if (computed[i][key] <= val) idx = i; else break; }
+  return idx;
+}
+
+function lookupByMD(md) {
+  if (md < computed[0].md || md > computed[computed.length-1].md) return null;
+  const idx = findLowerIdx('md', md);
+  if (idx < 0 || idx >= computed.length-1) return null;
+  const lo = computed[idx], hi = computed[idx+1];
+  const tvd = lo.a*md + lo.b;
+  const t = (hi.md-lo.md)>0 ? (md-lo.md)/(hi.md-lo.md) : 0;
+  return {md, tvd, inc: lo.inc+t*(hi.inc-lo.inc), az: lo.az+t*(hi.az-lo.az)};
+}
+
+function lookupByTVD(tvd) {
+  if (tvd < computed[0].tvd || tvd > computed[computed.length-1].tvd) return null;
+  const idx = findLowerIdx('tvd', tvd);
+  if (idx < 0 || idx >= computed.length-1) return null;
+  const next = computed[idx+1];
+  if (Math.abs(next.a) < 1e-12) return null;
+  return lookupByMD((tvd-next.b)/next.a);
+}
+
+function lookupByTVDss(tvdss, rkb) { return lookupByTVD(tvdss+rkb); }
+
+function doLookup(col, val) {
+  const rkb = parseFloat(document.getElementById('rkb').value) || 0;
+  if (col==='md')    return lookupByMD(val);
+  if (col==='tvd')   return lookupByTVD(val);
+  if (col==='tvdss') return lookupByTVDss(val, rkb);
+  return null;
+}
+
+function addRow() {
+  rowCount++;
+  const id = rowCount;
+  rows.push({id, activeCol: null});
+  const tbody = document.getElementById('lookup-body');
+  const tr = document.createElement('tr');
+  tr.id = 'tr-'+id;
+  tr.innerHTML = `
+    <td style="color:#bbb;font-size:12px;" id="idx-${id}">${rows.length}</td>
+    <td><input class="depth-input" id="inp-md-${id}"    type="number" placeholder="—" /></td>
+    <td><input class="depth-input" id="inp-tvd-${id}"   type="number" placeholder="—" /></td>
+    <td><input class="depth-input" id="inp-tvdss-${id}" type="number" placeholder="—" /></td>
+    <td><span class="result-cell muted" id="inc-${id}">—</span></td>
+    <td><span class="result-cell muted" id="az-${id}">—</span></td>
+    <td><button class="del-btn" onclick="removeRow(${id})">&#x2715;</button></td>
+  `;
+  tbody.appendChild(tr);
+  ['md','tvd','tvdss'].forEach(col => {
+    const inp = document.getElementById(`inp-${col}-${id}`);
+    inp.addEventListener('input', () => onColInput(id, col));
+    inp.addEventListener('focus', () => { if (inp.readOnly) inp.blur(); else rows.find(r=>r.id===id).activeCol=col; });
+  });
+  setTimeout(() => { document.getElementById('inp-md-'+id).focus(); }, 50);
+}
+
+function onColInput(id, col) {
+  const row = rows.find(r=>r.id===id);
+  if (!row) return;
+  row.activeCol = col;
+  const inp = document.getElementById(`inp-${col}-${id}`);
+  const val = inp.value.trim();
+  const others = ['md','tvd','tvdss'].filter(c=>c!==col);
+
+  if (val==='') {
+    row.activeCol = null;
+    others.forEach(c => {
+      const o = document.getElementById(`inp-${c}-${id}`);
+      o.readOnly=false; o.value=''; o.className='depth-input'; o.placeholder='—';
+    });
+    inp.className='depth-input';
+    setResultCells(id, null);
+    return;
+  }
+
+  others.forEach(c => {
+    const o = document.getElementById(`inp-${c}-${id}`);
+    o.readOnly=true; o.className='depth-input'; o.placeholder='—';
+  });
+
+  const numVal = parseFloat(val);
+  if (isNaN(numVal)) { setResultCells(id, null); return; }
+  const res = doLookup(col, numVal);
+  const rkb = parseFloat(document.getElementById('rkb').value)||0;
+
+  if (!res) {
+    others.forEach(c => {
+      const o = document.getElementById(`inp-${c}-${id}`);
+      o.value=''; o.placeholder='out of range'; o.className='depth-input oor';
+    });
+    setResultCells(id, null);
+    return;
+  }
+
+  const vals = {md: res.md.toFixed(2), tvd: res.tvd.toFixed(2), tvdss: (res.tvd-rkb).toFixed(2)};
+  others.forEach(c => {
+    const o = document.getElementById(`inp-${c}-${id}`);
+    o.value=vals[c]; o.className='depth-input has-result';
+  });
+  setResultCells(id, res);
+}
+
+function setResultCells(id, res) {
+  const incEl = document.getElementById('inc-'+id);
+  const azEl  = document.getElementById('az-'+id);
+  if (res) {
+    incEl.textContent=res.inc.toFixed(2); incEl.className='result-cell computed';
+    azEl.textContent=res.az.toFixed(2);   azEl.className='result-cell computed';
+  } else {
+    incEl.textContent='—'; incEl.className='result-cell muted';
+    azEl.textContent='—';  azEl.className='result-cell muted';
+  }
+}
+
+function removeRow(id) {
+  rows = rows.filter(r=>r.id!==id);
+  const tr = document.getElementById('tr-'+id);
+  if (tr) tr.remove();
+  rows.forEach((r,i) => { const el=document.getElementById('idx-'+r.id); if(el) el.textContent=i+1; });
+  if (rows.length===0)
+    document.getElementById('lookup-body').innerHTML='<tr><td colspan="7"><div class="empty-state">Click "+ Add Row" to look up depths</div></td></tr>';
+}
+
+function recalcAll() {
+  rows.forEach(row => { if (row.activeCol) onColInput(row.id, row.activeCol); });
+}
+
+function copyResults() {
+  const rkb = parseFloat(document.getElementById('rkb').value)||0;
+  const header = ['MD','TVD','TVDss','Incl','Azimuth'].join('\t');
+  const lines = rows.map(row => {
+    if (!row.activeCol) return Array(5).fill('').join('\t');
+    const inp = document.getElementById(`inp-${row.activeCol}-${row.id}`);
+    if (!inp||inp.value.trim()==='') return Array(5).fill('').join('\t');
+    const res = doLookup(row.activeCol, parseFloat(inp.value));
+    if (!res) return Array(5).fill('OOR').join('\t');
+    return [res.md.toFixed(2),res.tvd.toFixed(2),(res.tvd-rkb).toFixed(2),res.inc.toFixed(2),res.az.toFixed(2)].join('\t');
+  }).join('\n');
+  navigator.clipboard.writeText(header+'\n'+lines).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent='✓ Copied!';
+    setTimeout(()=>btn.textContent='📋 Copy', 2000);
+  });
+}
+</script>
+</body>
+</html>
