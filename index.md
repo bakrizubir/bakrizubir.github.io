@@ -5,13 +5,13 @@ title: Bakri Zubir
 
 # Bakri Zubir, MSc, CEng MEI
 
-**Project Management Leader | Drilling & Well Engineering Specialist | Digital Innovator**
+**Senior Drilling Engineer | Well Engineering Specialist | Digital Innovator | Project Management Leader**
 
 ---
 
 ## About Me
 
-I'm a project management leader and senior engineer with over 16 years of experience driving asset development and capital projects across IOC, NOC, and Fortune 500 energy companies. I specialize in bridging complex subsurface engineering with large-scale capital projects, managing portfolios up to $250M throughout the full project lifecycle.
+I'm a project management leader and senior drilling engineer with over 16 years of experience driving asset development and capital projects across IOC, NOC, and Fortune 500 energy companies. I specialize in bridging complex subsurface engineering with large-scale capital projects, managing portfolios up to $250M throughout the full project lifecycle.
 
 My career spans leadership roles at **EOG Resources**, **Bapco Upstream**, **Hess Corporation**, **EnQuest**, and **Petronas** across Bahrain, Malaysia, Thailand, Myanmar, and the UK. I've consistently delivered exceptional results: reducing well costs by 50%, accelerating project timelines, and driving operational efficiency improvements of 20-110%.
 
