@@ -13,7 +13,7 @@
       font-family: 'Chivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 16px;
       line-height: 1.6;
-      color: #111;
+      color: #000;
       background: #fff;
     }
 
@@ -37,12 +37,12 @@
     }
     header.site-header p {
       font-size: 13px;
-      color: #999;
+      color: #444;
       margin-top: 2px;
     }
     header.site-header a.github-link {
       font-size: 12px;
-      color: #999;
+      color: #444;
       text-decoration: none;
     }
     header.site-header a.github-link:hover { color: #333; }
@@ -56,7 +56,7 @@
 
     .page-desc {
       font-size: 15px;
-      color: #555;
+      color: #222;
       margin-top: 4px;
       margin-bottom: 1.5rem;
     }
@@ -72,7 +72,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: #999;
+      color: #444;
       margin-bottom: 8px;
     }
     .steps-list {
@@ -85,7 +85,7 @@
     .steps-list li strong { color: #333; }
     .page-subtitle {
       font-size: 13px;
-      color: #999;
+      color: #444;
       margin-bottom: 2rem;
       border-bottom: 1px solid #eee;
       padding-bottom: 1.5rem;
@@ -105,12 +105,12 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: #999;
+      color: #444;
       margin-bottom: 5px;
     }
     .rkb-input {
       width: 90px;
-      border: 1px solid #ccc;
+      border: 1px solid #222;
       border-radius: 4px;
       padding: 6px 10px;
       font-size: 14px;
@@ -132,12 +132,12 @@
       cursor: pointer;
       transition: background 0.15s;
     }
-    .load-btn:hover { background: #555; border-color: #555; }
+    .load-btn:hover { background: #222; border-color: #222; }
     .load-btn:active { transform: scale(0.98); }
 
     .status {
       font-size: 14px;
-      color: #555;
+      color: #222;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -163,7 +163,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: #555;
+      color: #222;
       margin-bottom: 10px;
     }
 
@@ -177,14 +177,14 @@
       border-radius: 4px;
       padding: 10px;
       background: #fafafa;
-      color: #666;
+      color: #222;
       line-height: 1.7;
     }
     textarea:focus { outline: none; border-color: #333; color: #333; background: #fff; }
 
     .hint {
       font-size: 13px;
-      color: #666;
+      color: #222;
       margin-top: 8px;
     }
 
@@ -202,7 +202,7 @@
       border: 1px solid #ddd;
       border-radius: 4px;
       background: #fff;
-      color: #999;
+      color: #444;
       cursor: pointer;
       transition: all 0.15s;
     }
@@ -237,17 +237,17 @@
 
     .depth-input {
       width: 110px;
-      border: 1px solid #ccc;
+      border: 1px solid #222;
       border-radius: 4px;
       padding: 6px 8px;
       font-size: 15px;
       font-family: 'Courier New', monospace;
       background: #fff;
-      color: #111;
+      color: #000;
       text-align: center;
     }
     .depth-input:focus { outline: none; border-color: #333; }
-    .depth-input[readonly] { color: #bbb; cursor: default; background: #fafafa; }
+    .depth-input[readonly] { color: #222; cursor: default; background: #fafafa; }
     .depth-input.has-result {
       color: #27ae60;
       border-color: #a8d5b5;
@@ -263,11 +263,11 @@
 
     .result-cell { font-family: 'Courier New', monospace; font-size: 15px; }
     .result-cell.computed { color: #27ae60; font-weight: 600; }
-    .result-cell.muted { color: #ccc; }
+    .result-cell.muted { color: #222; }
 
     .del-btn {
       background: none; border: none; cursor: pointer;
-      color: #ccc; padding: 2px 6px;
+      color: #222; padding: 2px 6px;
       border-radius: 4px; font-size: 15px;
       transition: color 0.15s;
     }
@@ -281,15 +281,15 @@
       border: 1px dashed #ddd;
       border-radius: 4px;
       background: transparent;
-      color: #999;
+      color: #444;
       cursor: pointer;
       width: 100%;
       transition: all 0.15s;
     }
-    .add-btn:hover { background: #fafafa; color: #333; border-color: #bbb; }
+    .add-btn:hover { background: #fafafa; color: #333; border-color: #222; }
 
     .empty-state {
-      color: #ccc;
+      color: #222;
       font-size: 13px;
       text-align: center;
       padding: 2rem 0;
@@ -301,9 +301,9 @@
       margin-top: 2.5rem;
       padding-top: 1.5rem;
       font-size: 12px;
-      color: #bbb;
+      color: #222;
     }
-    footer a { color: #999; text-decoration: none; }
+    footer a { color: #444; text-decoration: none; }
     footer a:hover { color: #333; }
 
     @media (max-width: 900px) {
@@ -494,7 +494,7 @@ function addRow() {
   const tr = document.createElement('tr');
   tr.id = 'tr-'+id;
   tr.innerHTML = `
-    <td style="color:#bbb;font-size:12px;" id="idx-${id}">${rows.length}</td>
+    <td style="color:#222;font-size:12px;" id="idx-${id}">${rows.length}</td>
     <td><input class="depth-input" id="inp-md-${id}"    type="number" placeholder="—" /></td>
     <td><input class="depth-input" id="inp-tvd-${id}"   type="number" placeholder="—" /></td>
     <td><input class="depth-input" id="inp-tvdss-${id}" type="number" placeholder="—" /></td>
