@@ -18,7 +18,7 @@ def load_mmsi_list(rigs_path):
         rigs = yaml.safe_load(f)
     if not rigs:
         return []
-    return [str(r["mmsi"]) for r in rigs if r.get("mmsi")]
+    return [int(r["mmsi"]) for r in rigs if r.get("mmsi")]
 
 
 async def fetch_positions(api_key, mmsi_list, positions):
@@ -30,6 +30,8 @@ async def fetch_positions(api_key, mmsi_list, positions):
     try:
         async with websockets.connect(AISSTREAM_URL) as ws:
             await ws.send(json.dumps(subscription))
+            await asyncio.sleep(1)
+            print("Subscription sent.")
             print(f"Connected. Listening for {LISTEN_SECONDS}s...")
             deadline = time.monotonic() + LISTEN_SECONDS
             while time.monotonic() < deadline:
@@ -54,7 +56,9 @@ async def fetch_positions(api_key, mmsi_list, positions):
                 except Exception as e:
                     print(f"  Warning: skipping malformed message: {e}", file=sys.stderr)
     except Exception as e:
-        print(f"WebSocket error: {e}", file=sys.stderr)
+        import traceback
+        print(f"WebSocket error ({type(e).__name__}): {e}", file=sys.stderr)
+        traceback.print_exc(file=sys.stderr)
         print("Writing whatever was captured...", file=sys.stderr)
 
 
@@ -74,7 +78,7 @@ def main():
         print("No rigs with MMSI in _data/rigs.yml. Exiting.", file=sys.stderr)
         sys.exit(0)
 
-    print(f"Tracking {len(mmsi_list)} MMSIs: {', '.join(mmsi_list)}")
+    print(f"Tracking {len(mmsi_list)} MMSIs: {', '.join(str(m) for m in mmsi_list)}")
 
     positions = {}
     asyncio.run(fetch_positions(api_key, mmsi_list, positions))
