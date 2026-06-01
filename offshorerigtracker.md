@@ -10,7 +10,7 @@ title: Spindletop™ Offshore Rig Tracker
 <p style="color: #888; font-size: 0.9em; margin-top: -10px; margin-bottom: 20px;">built by Bakri Zubir</p>
 
 <div style="background-color: #f4f4f4; border-left: 4px solid #0066cc; padding: 20px; margin: 20px 0; border-radius: 5px;">
-This map shows approximate positions of offshore drilling rigs sourced from public AIS (Automatic Identification System) broadcasts and industry tracking data. Positions are updated periodically — rigs that have disabled their transponders or are in transit may not appear. Not all active rigs are included.
+This map will show offshore drilling rig positions tracked by IMO/MMSI via public AIS broadcasts. Live AIS integration is currently in development — rig data will populate here once the automated daily update system is live. Rig list update is ongoing..
 </div>
 
 <div id="rig-map" style="height: 750px; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; margin-top: 20px; margin-bottom: 20px; border-radius: 0;"></div>
@@ -39,18 +39,7 @@ function makeIcon(type) {
   });
 }
 
-var rigs = [
-  { name: 'Al Hoda',               type: 'jackup', operator: 'Bapco / ABAN',       depth: '300 ft',   status: 'Active', lat:  26.22, lng:  50.48, field: 'Bahrain Field' },
-  { name: 'West Castor',           type: 'jackup', operator: 'Seadrill',            depth: '375 ft',   status: 'Active', lat:  27.10, lng:  49.60, field: 'Arabian Gulf' },
-  { name: 'West Capella',          type: 'semi',   operator: 'Seadrill',            depth: '10,000 ft',status: 'Active', lat:   4.85, lng: 112.95, field: 'Sarawak, Malaysia' },
-  { name: 'ENSCO 55',              type: 'jackup', operator: 'Valaris',             depth: '350 ft',   status: 'Active', lat:   9.80, lng: 100.90, field: 'Gulf of Thailand' },
-  { name: 'Atwood Orca',           type: 'drill',  operator: 'Valaris',             depth: '12,000 ft',status: 'Active', lat:   8.10, lng: 107.20, field: 'Offshore Vietnam' },
-  { name: 'Paul B. Loyd Jr.',      type: 'semi',   operator: 'Transocean',          depth: '1,500 ft', status: 'Active', lat:  60.30, lng:   1.20, field: 'UK North Sea' },
-  { name: 'Deepsea Aberdeen',      type: 'semi',   operator: 'Odfjell Drilling',    depth: '5,000 ft', status: 'Active', lat:  58.50, lng:   1.80, field: 'UK North Sea' },
-  { name: 'Deepwater Invictus',    type: 'drill',  operator: 'Transocean',          depth: '12,000 ft',status: 'Active', lat:  27.40, lng: -89.80, field: 'Gulf of Mexico' },
-  { name: 'Valaris DS-11',         type: 'drill',  operator: 'Valaris',             depth: '12,000 ft',status: 'Active', lat:  28.10, lng: -88.50, field: 'Gulf of Mexico' },
-  { name: 'Topaz Driller',         type: 'jackup', operator: 'Vantage Drilling',    depth: '375 ft',   status: 'Active', lat:  16.50, lng:  94.50, field: 'Offshore Myanmar' },
-];
+var rigs = [];
 
 rigs.forEach(function(rig) {
   L.marker([rig.lat, rig.lng], { icon: makeIcon(rig.type) })
