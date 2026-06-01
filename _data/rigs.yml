@@ -1,0 +1,147 @@
+# Velesto Energy (Malaysia)
+- name: Velesto Naga 2
+  operator: Velesto Energy
+  type: jackup
+  imo: "8770560"
+  mmsi: null
+  flag: Malaysia/Singapore
+  year: 2009
+  status_note: "Platform — track by IMO"
+  default_lat: 4.85
+  default_lng: 113.10
+  default_region: Offshore Sarawak
+
+- name: Velesto Naga 3
+  operator: Velesto Energy
+  type: jackup
+  imo: "8769614"
+  mmsi: null
+  flag: Malaysia
+  year: 2010
+  status_note: "Platform — track by IMO"
+  default_lat: 5.20
+  default_lng: 113.50
+  default_region: Offshore Sarawak
+
+- name: Velesto Naga 4
+  operator: Velesto Energy
+  type: jackup
+  imo: "8771447"
+  mmsi: "533130963"
+  flag: Malaysia
+  year: 2010
+  status_note: "Active AIS"
+  default_lat: 5.45
+  default_lng: 113.80
+  default_region: Offshore Sarawak
+
+- name: Velesto Naga 5
+  operator: Velesto Energy
+  type: jackup
+  imo: "8771784"
+  mmsi: "533130175"
+  flag: Malaysia
+  year: 2011
+  status_note: "Active AIS"
+  default_lat: 5.70
+  default_lng: 114.10
+  default_region: Offshore Sabah
+
+- name: Velesto Naga 6
+  operator: Velesto Energy
+  type: jackup
+  imo: "9679000"
+  mmsi: "351873000"
+  flag: Panama
+  year: 2014
+  status_note: "Active AIS"
+  default_lat: 5.95
+  default_lng: 114.40
+  default_region: Offshore Sabah
+
+# Borr Drilling
+- name: Borr Gunnlod
+  operator: Borr Drilling
+  type: jackup
+  imo: "9735074"
+  mmsi: "636019736"
+  flag: Liberia
+  year: 2014
+  status_note: "Active AIS — Malaysian EEZ"
+  default_lat: 4.60
+  default_lng: 112.80
+  default_region: Malaysian EEZ
+
+# PV Drilling (Vietnam)
+- name: PV Drilling I
+  operator: PV Drilling
+  type: jackup
+  imo: "8768684"
+  mmsi: "574369000"
+  flag: Vietnam
+  year: 2007
+  status_note: "Active AIS (3WNX)"
+  default_lat: 10.20
+  default_lng: 108.30
+  default_region: Offshore Vietnam
+
+- name: PV Drilling III
+  operator: PV Drilling
+  type: jackup
+  imo: "9506825"
+  mmsi: "574957000"
+  flag: Vietnam
+  year: 2009
+  status_note: "Active AIS (3WWI)"
+  default_lat: 10.50
+  default_lng: 108.60
+  default_region: Offshore Vietnam
+
+# Sapura / Vantris Energy
+- name: SKD Pelaut
+  operator: Sapura / Vantris Energy
+  type: semi
+  imo: "8763529"
+  mmsi: null
+  flag: Unknown
+  year: 1994
+  status_note: "Platform — track by IMO"
+  default_lat: 4.30
+  default_lng: 113.30
+  default_region: Offshore Malaysia
+
+- name: SKD Esperanza
+  operator: Sapura / Vantris Energy
+  type: semi
+  imo: "9630509"
+  mmsi: null
+  flag: ""
+  year: 2013
+  status_note: "Platform — track by IMO"
+  default_lat: 4.45
+  default_lng: 113.60
+  default_region: Offshore Malaysia
+
+- name: SKD Sapura Berani
+  operator: Sapura / Vantris Energy
+  type: semi
+  imo: "8768359"
+  mmsi: "372128000"
+  flag: Panama
+  year: 2006
+  status_note: "Active AIS — Malaysian EEZ"
+  default_lat: 4.70
+  default_lng: 113.90
+  default_region: Offshore Malaysia
+
+- name: SKD Sapura Alliance
+  operator: Sapura / Vantris Energy
+  type: semi
+  imo: "8765084"
+  mmsi: null
+  flag: ""
+  year: 2001
+  status_note: "Platform — track by IMO"
+  default_lat: 4.55
+  default_lng: 114.20
+  default_region: Offshore Malaysia

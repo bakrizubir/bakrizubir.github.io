@@ -1,0 +1,7 @@
+# Excel data files (kept locally only)
+*.xlsx
+*.xls
+
+# OS files
+.DS_Store
+Thumbs.db
