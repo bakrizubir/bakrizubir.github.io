@@ -10,14 +10,14 @@ title: Spindletop™ Offshore Rig Tracker
 <p style="color: #888; font-size: 0.9em; margin-top: -10px; margin-bottom: 20px;">built by Bakri Zubir</p>
 
 <div style="background-color: #f4f4f4; border-left: 4px solid #0066cc; padding: 20px; margin: 20px 0; border-radius: 5px;">
-This map will show offshore drilling rig positions tracked by IMO/MMSI via public AIS broadcasts. Live AIS integration is currently in development — rig data will populate here once the automated daily update system is live. Rig list update is ongoing..
+This map shows offshore drilling rigs tracked by IMO/MMSI in Southeast Asian waters. Positions shown are current operating regions. Live AIS integration is in development — automatic daily updates will activate once data source connectivity is resolved.
 </div>
 
 <div id="rig-map" style="height: 750px; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; margin-top: 20px; margin-bottom: 20px; border-radius: 0;"></div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-var map = L.map('rig-map').setView([20, 60], 3);
+var map = L.map('rig-map').setView([6, 112], 5);
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
   maxZoom: 19,
@@ -39,20 +39,39 @@ function makeIcon(type) {
   });
 }
 
-var rigs = [];
+var rigs = [
+{% for rig in site.data.rigs %}
+  {
+    name: {{ rig.name | jsonify }},
+    operator: {{ rig.operator | jsonify }},
+    type: {{ rig.type | jsonify }},
+    imo: {{ rig.imo | jsonify }},
+    mmsi: {{ rig.mmsi | jsonify }},
+    flag: {{ rig.flag | jsonify }},
+    year: {{ rig.year }},
+    status: {{ rig.status_note | jsonify }},
+    field: {{ rig.default_region | jsonify }},
+    lat: {{ rig.default_lat }},
+    lng: {{ rig.default_lng }}
+  }{% unless forloop.last %},{% endunless %}
+{% endfor %}
+];
 
 rigs.forEach(function(rig) {
   L.marker([rig.lat, rig.lng], { icon: makeIcon(rig.type) })
     .addTo(map)
     .bindPopup(
-      '<div style="font-family:sans-serif;min-width:180px;">' +
+      '<div style="font-family:sans-serif;min-width:200px;">' +
       '<strong style="color:#0066cc;">' + rig.name + '</strong><br>' +
       '<span style="color:#888;font-size:0.85em;">' + rigTypes[rig.type].label + '</span><br><br>' +
       '<table style="font-size:0.85em;width:100%;border-collapse:collapse;">' +
-      '<tr><td style="color:#555;padding:2px 8px 2px 0;">Field</td><td>'       + rig.field    + '</td></tr>' +
-      '<tr><td style="color:#555;padding:2px 8px 2px 0;">Operator</td><td>'    + rig.operator + '</td></tr>' +
-      '<tr><td style="color:#555;padding:2px 8px 2px 0;">Water Depth</td><td>' + rig.depth    + '</td></tr>' +
-      '<tr><td style="color:#555;padding:2px 8px 2px 0;">Status</td><td><span style="color:#27ae60;">● ' + rig.status + '</span></td></tr>' +
+      '<tr><td style="color:#555;padding:2px 8px 2px 0;">Operator</td><td>'   + rig.operator          + '</td></tr>' +
+      '<tr><td style="color:#555;padding:2px 8px 2px 0;">IMO</td><td>'        + rig.imo               + '</td></tr>' +
+      '<tr><td style="color:#555;padding:2px 8px 2px 0;">MMSI</td><td>'       + (rig.mmsi || '—')     + '</td></tr>' +
+      '<tr><td style="color:#555;padding:2px 8px 2px 0;">Flag</td><td>'       + (rig.flag || '—')     + '</td></tr>' +
+      '<tr><td style="color:#555;padding:2px 8px 2px 0;">Year Built</td><td>' + rig.year              + '</td></tr>' +
+      '<tr><td style="color:#555;padding:2px 8px 2px 0;">Region</td><td>'     + rig.field             + '</td></tr>' +
+      '<tr><td style="color:#555;padding:2px 8px 2px 0;">Status</td><td>'     + rig.status            + '</td></tr>' +
       '</table></div>'
     );
 });
