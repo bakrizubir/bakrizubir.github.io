@@ -5,7 +5,9 @@ title: Spindletop™ Offshore Rig Tracker
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-# Offshore Rig Tracker
+# Spindletop&trade; Offshore Rig Tracker
+
+<p style="color: #888; font-size: 0.9em; margin-top: -10px; margin-bottom: 20px;">built by Bakri Zubir</p>
 
 <div style="background-color: #f4f4f4; border-left: 4px solid #0066cc; padding: 20px; margin: 20px 0; border-radius: 5px;">
 This map shows approximate positions of offshore drilling rigs sourced from public AIS (Automatic Identification System) broadcasts and industry tracking data. Positions are updated periodically — rigs that have disabled their transponders or are in transit may not appear. Not all active rigs are included.
