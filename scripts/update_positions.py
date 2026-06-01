@@ -24,42 +24,50 @@ def load_mmsi_list(rigs_path):
 async def fetch_positions(api_key, mmsi_list, positions):
     subscription = {
         "APIKey": api_key,
-        "BoundingBoxes": [[-90, -180], [90, 180]],
         "FiltersShipMMSI": mmsi_list,
     }
-    try:
-        async with websockets.connect(AISSTREAM_URL) as ws:
-            await ws.send(json.dumps(subscription))
-            await asyncio.sleep(1)
-            print("Subscription sent.")
-            print(f"Connected. Listening for {LISTEN_SECONDS}s...")
-            deadline = time.monotonic() + LISTEN_SECONDS
-            while time.monotonic() < deadline:
-                remaining = deadline - time.monotonic()
-                try:
-                    raw = await asyncio.wait_for(ws.recv(), timeout=min(10.0, remaining))
-                except asyncio.TimeoutError:
-                    continue
-                try:
-                    msg = json.loads(raw)
-                    if msg.get("MessageType") != "PositionReport":
+    deadline = time.monotonic() + LISTEN_SECONDS
+    max_attempts = 5
+    attempt = 0
+
+    while attempt < max_attempts and time.monotonic() < deadline:
+        attempt += 1
+        remaining_total = deadline - time.monotonic()
+        print(f"Connecting (attempt {attempt}/{max_attempts}, {remaining_total:.0f}s remaining)...")
+        try:
+            async with websockets.connect(AISSTREAM_URL, ping_interval=20, ping_timeout=10) as ws:
+                await ws.send(json.dumps(subscription))
+                await asyncio.sleep(1)
+                print("Subscription sent.")
+                while time.monotonic() < deadline:
+                    remaining = deadline - time.monotonic()
+                    try:
+                        raw = await asyncio.wait_for(ws.recv(), timeout=min(10.0, remaining))
+                    except asyncio.TimeoutError:
                         continue
-                    meta = msg.get("MetaData", {})
-                    report = msg.get("Message", {}).get("PositionReport", {})
-                    mmsi = str(meta.get("MMSI", ""))
-                    lat = report.get("Latitude")
-                    lng = report.get("Longitude")
-                    ts = meta.get("time_utc") or datetime.now(timezone.utc).isoformat()
-                    if mmsi and lat is not None and lng is not None:
-                        positions[mmsi] = {"lat": lat, "lng": lng, "timestamp": ts}
-                        print(f"  {mmsi}: {lat:.4f}, {lng:.4f}")
-                except Exception as e:
-                    print(f"  Warning: skipping malformed message: {e}", file=sys.stderr)
-    except Exception as e:
-        import traceback
-        print(f"WebSocket error ({type(e).__name__}): {e}", file=sys.stderr)
-        traceback.print_exc(file=sys.stderr)
-        print("Writing whatever was captured...", file=sys.stderr)
+                    try:
+                        msg = json.loads(raw)
+                        if msg.get("MessageType") != "PositionReport":
+                            continue
+                        meta = msg.get("MetaData", {})
+                        report = msg.get("Message", {}).get("PositionReport", {})
+                        mmsi = str(meta.get("MMSI", ""))
+                        lat = report.get("Latitude")
+                        lng = report.get("Longitude")
+                        ts = meta.get("time_utc") or datetime.now(timezone.utc).isoformat()
+                        if mmsi and lat is not None and lng is not None:
+                            positions[mmsi] = {"lat": lat, "lng": lng, "timestamp": ts}
+                            print(f"  {mmsi}: {lat:.4f}, {lng:.4f}")
+                    except Exception as e:
+                        print(f"  Warning: skipping malformed message: {e}", file=sys.stderr)
+        except Exception as e:
+            import traceback
+            print(f"WebSocket error on attempt {attempt} ({type(e).__name__}): {e}", file=sys.stderr)
+            traceback.print_exc(file=sys.stderr)
+            if attempt < max_attempts and time.monotonic() < deadline:
+                print("Reconnecting...", file=sys.stderr)
+            else:
+                print("Writing whatever was captured...", file=sys.stderr)
 
 
 def main():
