@@ -11,7 +11,7 @@ title: Offshore Rig Tracker
 This map shows approximate positions of offshore drilling rigs sourced from public AIS (Automatic Identification System) broadcasts and industry tracking data. Positions are updated periodically — rigs that have disabled their transponders or are in transit may not appear. Not all active rigs are included.
 </div>
 
-<div id="rig-map" style="height: 500px; width: 100%; border-radius: 5px; margin: 20px 0;"></div>
+<div id="rig-map" style="height: 750px; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; margin-top: 20px; margin-bottom: 20px; border-radius: 0;"></div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
