@@ -5,13 +5,13 @@ title: Bakri Zubir
 
 # Bakri Zubir, MSc, CEng MEI
 
-**Senior Drilling Engineer | Well Engineering Specialist | Digital Innovator | Project Management Leader**
+**Senior Drilling Engineer | Building Well Engineering AI Tools | Exploring DeFI and Upstream RWA | Digital Innovation Lead.**
 
 ---
 
 ## About Me
 
-I'm a project management leader and senior drilling engineer with over 16 years of experience driving asset development and capital projects across IOC, NOC, and Fortune 500 energy companies. I specialize in bridging complex subsurface engineering with large-scale capital projects, managing portfolios up to $250M throughout the full project lifecycle.
+I'm a project management leader and senior drilling engineer with over 16 years of experience driving asset development and capital projects across IOC, NOC, and Fortune 500 energy companies. I specialize in bridging complex subsurface engineering with large-scale capital projects, managing portfolios up to $700M throughout the full project lifecycle.
 
 My career spans leadership roles at **EOG Resources**, **Bapco Upstream**, **Hess Corporation**, **EnQuest**, and **Petronas** across Bahrain, Malaysia, Thailand, Myanmar, and the UK. I've consistently delivered exceptional results: reducing well costs by 50%, accelerating project timelines, and driving operational efficiency improvements of 20-110%.
 
@@ -34,17 +34,9 @@ As a Chartered Engineer with an MSc in Petroleum Engineering from Heriot-Watt Un
 
 ---
 
-## Writing & Thought Leadership
-
-I write about well engineering, drilling and completion careers, the future of gas energy, digital innovation in oil & gas, and the financial health of energy companies.
-
-**[Read on Substack →](#)** *(coming soon)*
-
----
-
 ## Key Achievements
 
-- Led $250M+ capital projects from concept to commissioning
+- Led $700M+ capital projects from concept to commissioning
 - Delivered $35M+ in cost savings through strategic project management and innovation
 - Reduced well delivery time by 50% on multiple projects across different operators
 - Pioneered drilling methods in extreme environments (HPHT, total losses, deepwater)
